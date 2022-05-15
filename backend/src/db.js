@@ -34,8 +34,10 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User } = sequelize.models;
+const { User, Comment, Favorite } = sequelize.models;
 
+User.hasMany(Comment);
+User.hasMany(Favorite);
 
 
 module.exports = {
