@@ -4,15 +4,36 @@ const apikey = process.env.apikey;
 
 const searchMovies = async (req, res, next) => {
     try {
-        const {movies} = req.params
+        const {movies} = req.params;
+        const userId = req.user;
 
-        const movieResults = await axios.get(`https://www.omdbapi.com/?apikey=${apikey}&s=${movies}`)
-        console.log(movieResults.data);
+        let results = []
 
+        const movieResults = await axios.get(`https://www.omdbapi.com/?apikey=${apikey}&s=${movies}`);
 
-        res.status(200).send(movieResults.data.Search)
+        if(movieResults.data.hasOwnProperty('Search')){
+            for(const mov of movieResults.data.Search) {
+                const result = await Favorite.findOne({
+                    where: {
+                        imdbID: mov.imdbID,
+                        userId
+                    }
+                })
+                
+                results.push({
+                    title: mov.Title,
+                    year: mov.Year,
+                    type: mov.Type,
+                    poster: mov.Poster,
+                    imdbID: mov.imdbID,
+                    favorite: result!==null?result.favorite:false
+                })
+            }
+        }
+
+        res.status(200).send(results)
     } catch (error) {
-        res.status(404).json(error.message)
+        res.status(404).json(error)
         next(error)
     }
 }
@@ -22,7 +43,6 @@ const getMovieByID = async (req, res, next) => {
         const {movieID} = req.params
 
         const movieResults = await axios.get(`https://www.omdbapi.com/?apikey=${apikey}&i=${movieID}&plot=full`)
-        console.log(movieResults.data);
 
         const movie = {
             id: movieResults.data.imdbID,

@@ -24,6 +24,23 @@ body {
   max-width: 1072px;
 }
 
+@media (max-width: 400px){
+  .root, .main{
+    max-width: 400px;
+  }
+
+  .logo{
+    font-size: 24px;
+  }
+
+  .logo img{
+    width: 34px;
+    height: 34px;
+    margin-right: 16px;
+  }
+
+}
+
 .main{
   width: 1072px;
 }
@@ -67,6 +84,7 @@ body {
   color: var(--main-font-color);
 }
 
+
 .logo{
   display: flex;
   align-items: center;
@@ -81,6 +99,7 @@ body {
   height: 50px;
   margin-right: 24px;;
 }
+
 
 .logged{
   display: flex;
@@ -98,6 +117,11 @@ body {
   margin: 0 auto;
   display: flex;
   max-width: 1072px;
+}
+
+@media screen and(max-width: 400px) {
+  .dashboard{
+    max-width: 400px;}
 }
 
 /* -------------- SearchBar -------------- */
@@ -144,6 +168,9 @@ body {
    width: 100%;
  }
 
+ .results a{
+   text-decoration: none;
+ }
  .no-results{
    margin: 0 auto;
   display: flex;
@@ -237,6 +264,7 @@ body {
 
 
  /* ------------ Movie Details ------------ */
+
  .details-page{
   margin: 0 auto;
   display: flex;
@@ -247,6 +275,11 @@ body {
   color: #7A8C99;
   font-size: 31px;
   line-height: 1px;
+  text-decoration: none;
+}
+
+.return:hover{
+  color: white;
 }
 
 .details{

@@ -1,4 +1,4 @@
-import {FOUND_MOVIES, MOVIE_DETAILS} from '../actions/actionNames'
+import {FOUND_MOVIES, MOVIE_DETAILS, MOVIE_FAVORITES} from '../actions/actionNames'
 
 const initialState = {
     movies: [],
@@ -18,6 +18,9 @@ const moviesReducer = (state = initialState, action) => {
                 ...state,
                 details: action.payload
             }
+
+        case MOVIE_FAVORITES:
+            return
     
         default:
             return state;

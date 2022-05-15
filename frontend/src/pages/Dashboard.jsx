@@ -1,13 +1,16 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { searchMovies } from '../redux/actions';
 import Header from '../components/Header';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchBar from '../components/SearchBar';
 import Results from '../components/Results';
 
 export default function Dashboard({setAuth}) {
-    const [results, setResults] = useState([])
+    const results = useSelector(state => state.store.movies);
+    const dispatch = useDispatch();
 
     const [name, setName] = useState("");
 
@@ -34,8 +37,9 @@ export default function Dashboard({setAuth}) {
         toast.success("Logged out successfully")
     }
 
-    const findMovies = (e)=>{
-        console.log(e.target.value);
+    const findMovies = async (e)=>{
+        await dispatch(searchMovies(e.target.value))
+
     }
 
     
