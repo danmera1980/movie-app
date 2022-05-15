@@ -53,9 +53,6 @@ export default function Register({setAuth}) {
                 <span>Create a new account to use our platform</span>
                 <div className="login-form">
                     <form onSubmit={onSubmitForm}>
-                        <input className='form-control my-3' type="text" name='name' placeholder='Name' value={name} onChange={e => onChange(e)}/>
-                        <input className='form-control my-3' type="text" name='lastName' placeholder='Last Name' value={lastName} onChange={e => onChange(e)}/>
-                        <input className='form-control my-3' type="text" name='username' placeholder='Username' value={username} onChange={e => onChange(e)}/>
                         <input className='form-control my-3' type="email" name='email' placeholder='E-mail' value={email} onChange={e => onChange(e)}/>
                         <input className='form-control my-3' type="password" name='password' value={password} onChange={e => onChange(e)}/>
                         <button className='btn btn-success btn-block'>Submit</button>

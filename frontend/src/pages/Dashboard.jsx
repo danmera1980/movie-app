@@ -3,69 +3,11 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from '../components/Header';
 import 'react-toastify/dist/ReactToastify.css';
-import SearchBoar from '../components/SearchBar';
 import SearchBar from '../components/SearchBar';
 import Results from '../components/Results';
 
 export default function Dashboard({setAuth}) {
-    const [results, setResults] = useState([
-        {
-            id: 1,
-            title: "Batman Begins",
-            type: "tv series",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: true
-        },
-        {
-            id: 2,
-            title: "Batman Begins",
-            type: "movie",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: false
-        },
-        {
-            id: 3,
-            title: "Batman Begins",
-            type: "movie",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: false
-        },
-        {
-            id: 4,
-            title: "Batman Begins",
-            type: "movie",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: false
-        },
-        {
-            id: 5,
-            title: "Batman Begins",
-            type: "movie",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: false
-        },
-        {
-            id: 6,
-            title: "Batman Begins",
-            type: "movie",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: false
-        },
-        {
-            id: 7,
-            title: "Batman Begins",
-            type: "movie",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: false
-        },
-        {
-            id: 8,
-            title: "Batman Begins",
-            type: "movie",
-            poster:"https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-            like: false
-        }
-    ])
+    const [results, setResults] = useState([])
 
     const [name, setName] = useState("");
 
