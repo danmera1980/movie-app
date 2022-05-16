@@ -10,7 +10,7 @@ const getAllCommentsByMovieID = async (req, res,  next) => {
                 imdbID: movieID
             }
         })
-        console.log(allComments);
+        // console.log(allComments);
         if(!allComments){
             throw new Error("No comments available")
         } else {
