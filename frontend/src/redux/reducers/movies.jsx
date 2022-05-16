@@ -1,4 +1,4 @@
-import {FOUND_MOVIES, MOVIE_DETAILS, MOVIE_FAVORITES} from '../actions/actionNames'
+import {FOUND_MOVIES, MOVIE_DETAILS, MOVIE_FAVORITES, TOGGLE_FAVORITE} from '../actions/actionNames'
 
 const initialState = {
     movies: [],
@@ -20,8 +20,16 @@ const moviesReducer = (state = initialState, action) => {
             }
 
         case MOVIE_FAVORITES:
-            return
-    
+            return {
+                ...state,
+                movies:[]
+            }
+
+        case TOGGLE_FAVORITE:
+            return {
+                ...state
+            }
+
         default:
             return state;
     }

@@ -38,7 +38,7 @@ export default function Dashboard({setAuth}) {
     }
 
     const findMovies = async (e)=>{
-        await dispatch(searchMovies(e.target.value))
+        await dispatch(searchMovies(e.target.value, localStorage.token))
 
     }
 
