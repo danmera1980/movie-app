@@ -4,6 +4,7 @@ import {Link, useParams} from 'react-router-dom';
 import {FaImdb, FaRegStar, FaStar} from 'react-icons/fa';
 import Header from '../components/Header';
 import { getMovieDetailsByID } from '../redux/actions';
+import imdbLogo from '../assets/images/IMDB_Logo.svg'
 
 export default function Details({setAuth}) {
   const movie = useSelector(state => state.store.details);
@@ -69,7 +70,7 @@ console.log(inputs, stars);
                 <span>Original title: {movie.title}</span>
                 <span>{`${movie.runtime} - ${movie.year} - ${movie.rated}`}</span>
                 <div className="imdb-rating">
-                  <FaImdb size={32} color={'#F5C518'}/>
+                  <img src={imdbLogo} alt="imdblogo" />
                   <h4>{movie.imdbRating}<span>/10</span></h4>
                 </div>
                 <h5>Overview</h5>

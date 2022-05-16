@@ -302,6 +302,8 @@ body {
   line-height: 100px;
   height: 75px;
   clear: both;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info span{
@@ -344,6 +346,9 @@ body {
   margin: 20px 0 24px 0;
 }
 
+.imdb-rating img{
+  width: 64px;
+}
 .imdb-rating h4{
   margin: 0 0 0 13px;
 }
