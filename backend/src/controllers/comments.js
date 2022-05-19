@@ -1,4 +1,4 @@
-const { Comment } = require("../db");
+const { User, Comment } = require("../db");
 
 const getAllCommentsByMovieID = async (req, res,  next) => {
 
@@ -8,6 +8,10 @@ const getAllCommentsByMovieID = async (req, res,  next) => {
         const allComments = await Comment.findAll({
             where: {
                 imdbID: movieID
+            },
+            include: {
+                model: User,
+                attributes: ["name"]
             }
         })
         // console.log(allComments);
@@ -33,9 +37,12 @@ const addNewComment = async (req, res, next) => {
         const commentByUser = await Comment.create({
             rating,
             comment,
-            imdbID: movieID,
-            userId
+            imdbID: movieID
         })
+
+        commentByUser.addUser(userId);
+
+
 
         if(!commentByUser){
             res.status(404).send("Error creating the comment")

@@ -5,7 +5,9 @@ const jwtGenerator = require('../utils/jwtGenerator');
 
 const registerUser = async (req, res, next) => {
     try {
-        const {email, password, imgUrl, userType} = req.body;
+        const {name, email, password, imgUrl, userType} = req.body;
+
+        console.log(name);
         const user = await User.findAll({
             where: {email: email}
         });
@@ -21,6 +23,7 @@ const registerUser = async (req, res, next) => {
 
         const newUser = await User.create({
             id: uuidv4(),
+            name: name,
             email: email,
             password: bcryptPassword,
             imgUrl: imgUrl===undefined?null:imgUrl,

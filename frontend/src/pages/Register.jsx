@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Welcome from '../components/Welcome';
+const backend_url = process.env.REACT_APP_BACKEND_URL
 
 export default function Register({setAuth}) {
 
     const [inputs, setInputs] = useState({
         name: "",
-        lastName: "",
         username: "",
         email: "",
         password: ""
     });
 
-    const {name, lastName, username, email, password} = inputs;
+    const {name, username, email, password} = inputs;
 
     const onChange = (e)=>{
         setInputs({
@@ -27,8 +27,8 @@ export default function Register({setAuth}) {
     const onSubmitForm = async (e)=>{
         e.preventDefault();
         try {
-            const body = {name, lastName, username, email, password}
-            const response = await axios.post("http://localhost:3001/auth/register", body)
+            const body = {name, username, email, password}
+            const response = await axios.post(`${backend_url}/auth/register`, body)
             // console.log(response.data);
 
             if(response.data.token){
@@ -53,6 +53,7 @@ export default function Register({setAuth}) {
                 <span>Create a new account to use our platform</span>
                 <div className="login-form">
                     <form onSubmit={onSubmitForm}>
+                        <input className='form-control my-3' type="name" name='name' placeholder='Name' value={name} onChange={e => onChange(e)}/>
                         <input className='form-control my-3' type="email" name='email' placeholder='E-mail' value={email} onChange={e => onChange(e)}/>
                         <input className='form-control my-3' type="password" name='password' value={password} onChange={e => onChange(e)}/>
                         <button className='btn btn-success btn-block'>Submit</button>

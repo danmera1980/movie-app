@@ -36,8 +36,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { User, Comment, Favorite } = sequelize.models;
 
-User.hasMany(Comment);
 User.hasMany(Favorite);
+User.belongsToMany(Comment, {through: "user_comment"});
+Comment.belongsToMany(User, {through: "user_comment"})
 
 
 module.exports = {
