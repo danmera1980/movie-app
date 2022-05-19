@@ -3,11 +3,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import {FaImdb, FaRegStar, FaStar} from 'react-icons/fa';
 import Header from '../components/Header';
-import { getMovieDetailsByID } from '../redux/actions';
+import { getCommentsByMovieID, getMovieDetailsByID } from '../redux/actions';
 import imdbLogo from '../assets/images/IMDB_Logo.svg'
 
 export default function Details({setAuth}) {
   const movie = useSelector(state => state.store.details);
+  const comments = useSelector(state => state.store.comments)
   const dispatch = useDispatch();
   const [stars,setStars] = useState(0)
   const [inputs, setInputs] = useState({
@@ -18,27 +19,11 @@ export default function Details({setAuth}) {
 
   useEffect(()=>{
     dispatch(getMovieDetailsByID(id))
+    dispatch(getCommentsByMovieID(id))
   },[])
 
   console.log(movie.title, movie.title===undefined?"empty":"full");
 
-let comments = [
-  {
-    name: 'Kim',
-    date: '10/22/2021',
-    comment: `Having read the book a hundred years ago, it took some time to begin to understand what was going on. If there is a criticism that many share, it is the pacing of the first part of the film. It needed something to set the scene for us, to show us who the strong and the weak were. I'm not much for narration (show me, don't tell me), but it may not have been a bad idea. The scenes are magnificent with special effects off the chart. Many desert travel scenes are quite endless. How do you spruce up a desert. I thought the sand worms were a little one dimensional. I know there is another film down the road.`
-  },
-  {
-    name: 'Steve',
-    date: '10/20/2021',
-    comment: `I've never read Frank Herbert's novel or seen any other adaptation of "Dune", so I have to take Denis Villeneuve's adaptation as the guide. It's an impressive movie. Not just the visuals, but in the story's complexity. Timothée Chalamet continues to reaffirm himself as one of the greatest actors of his generation. 
-              I'm eager to see part 2, as well as David Lynch's adaptation.`
-  },{
-    name: 'Adam',
-    date: '10/18/2021',
-    comment: `The visuals are pretty impressive. Even though the colour palette is monotonous, the visuals are beautiful and captivating. The story is ending, albeit slow at times. I really like Timothee Chamalet's character. Overall, I liked it.`
-  }
-]
 
 const onChangeInput = (e) => {
   e.preventDefault();

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FOUND_MOVIES, MOVIE_DETAILS, MOVIE_FAVORITES, TOGGLE_FAVORITE} from '../actions/actionNames'
+import {FOUND_MOVIES, MOVIE_DETAILS, MOVIE_FAVORITES, TOGGLE_FAVORITE, GET_COMMENTS} from '../actions/actionNames'
 const url = process.env.REACT_APP_BACKEND_URL
 
 export const searchMovies = (payload, token) => {
@@ -73,6 +73,20 @@ export const toggleFavorite = (movieID, token)=>{
             console.log(results);
             return dispatch({
                 type: TOGGLE_FAVORITE,
+                payload: results.data
+            })
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getCommentsByMovieID = (movieID) => {
+    try {
+        return async (dispatch) => {
+            var results = await axios.get(`${url}/comments/${movieID}`);
+            return dispatch({
+                type: GET_COMMENTS,
                 payload: results.data
             })
         }

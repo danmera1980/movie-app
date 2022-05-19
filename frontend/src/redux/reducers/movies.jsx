@@ -1,8 +1,9 @@
-import {FOUND_MOVIES, MOVIE_DETAILS, MOVIE_FAVORITES, TOGGLE_FAVORITE} from '../actions/actionNames'
+import {FOUND_MOVIES, MOVIE_DETAILS, MOVIE_FAVORITES, TOGGLE_FAVORITE, GET_COMMENTS} from '../actions/actionNames'
 
 const initialState = {
     movies: [],
-    details: {}
+    details: {},
+    comments: []
 }
 
 const moviesReducer = (state = initialState, action) => {
@@ -28,6 +29,12 @@ const moviesReducer = (state = initialState, action) => {
         case TOGGLE_FAVORITE:
             return {
                 ...state
+            }
+
+        case GET_COMMENTS:
+            return {
+                ...state,
+                comments: action.payload
             }
 
         default:
