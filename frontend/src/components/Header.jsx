@@ -1,5 +1,4 @@
 import React from 'react';
-import {FaRegBell} from 'react-icons/fa';
 import {GoSignOut} from 'react-icons/go';
 import logoImg from '../assets/images/tv.png'
 

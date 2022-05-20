@@ -28,7 +28,8 @@ const moviesReducer = (state = initialState, action) => {
 
         case TOGGLE_FAVORITE:
             return {
-                ...state
+                ...state,
+                
             }
 
         case GET_COMMENTS:

@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/" element={isAuthenticated?<Dashboard  setAuth={setAuth}/>:<Navigate to='/login'/>} />
         <Route exact path="/login" element={isAuthenticated?<Navigate to='/'/>:<Login setAuth={setAuth}/>} />
         <Route exact path="/register" element={isAuthenticated?<Navigate to='/login'/>:<Register  setAuth={setAuth}/>} />
-        <Route exact path="/details/:id" element={<Details setAuth={setAuth}/>} />
+        <Route exact path="/details/:id" element={isAuthenticated?<Details setAuth={setAuth}/>:<Login setAuth={setAuth}/>} />
       </Routes>
     </React.Fragment>
   );

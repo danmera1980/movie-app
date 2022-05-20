@@ -20,7 +20,7 @@ export default function Dashboard({setAuth}) {
         }
         try {
             const response = await axios.get("http://localhost:3001/dashboard/", headers);
-            setName(response.data.email)
+            setName(response.data.name)
         } catch (error) {
             console.log(error.message);
         }

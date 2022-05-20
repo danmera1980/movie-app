@@ -12,9 +12,11 @@ const dispatch = useDispatch();
         results = []
     }
     
-    const onLike = (imdbID) => {
-        dispatch(toggleFavorite(imdbID, localStorage.token))
+    const onLike = (imdbID, index) => {
+        dispatch(toggleFavorite(imdbID, localStorage.token, index))
     }
+
+
   return (
     <div className='results'>
         {
@@ -22,8 +24,8 @@ const dispatch = useDispatch();
                 <div className="result"  key={index}>
                     <div className="result-top">
                         <span className='result-type'>{result.type}</span>
-                        <div className="result-like" onClick={()=> onLike(result.imdbID)}>
-                            {result.favorite?<AiFillHeart/>:<AiOutlineHeart/>}
+                        <div className="result-like" onClick={()=> onLike(result.imdbID, index)}>
+                            {result.favorite?<div><AiFillHeart/>{result.favorite=true}</div>:<div><AiOutlineHeart/>{result.favorite=false}</div>}
                         </div>
                     </div>
 

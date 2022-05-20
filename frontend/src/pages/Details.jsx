@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import { getCommentsByMovieID, getMovieDetailsByID, newCommentByUser } from '../redux/actions';
 import imdbLogo from '../assets/images/IMDB_Logo.svg';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
 
 export default function Details({setAuth}) {
   const movie = useSelector(state => state.store.details);
@@ -24,10 +25,32 @@ export default function Details({setAuth}) {
     body: inputs
   })
 
+  const [name, setName] = useState("");
+
+    const getName = async ()=>{
+        const headers = {
+            headers: {'token': localStorage.token}
+        }
+        try {
+            const response = await axios.get("http://localhost:3001/dashboard/", headers);
+            setName(response.data.name)
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
   useEffect(()=>{
-    dispatch(getMovieDetailsByID(id))
-    dispatch(getCommentsByMovieID(id))
+    dispatch(getMovieDetailsByID(id));
+    dispatch(getCommentsByMovieID(id));
+    getName();
   },[])
+
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    setAuth(false);
+    toast.success("Logged out successfully")
+  }
 
   console.log(movie.title, movie.title===undefined?"empty":"full");
 
@@ -67,7 +90,7 @@ console.log(inputs, stars);
     <div className='details-page'>
       <div className="main">
         <ToastContainer/>
-        <Header/>
+        <Header name={name} logout={logout}/>
         <Link to="/" className='return'>
           <span>&#129044;</span>
         </Link>

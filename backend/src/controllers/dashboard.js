@@ -4,7 +4,7 @@ const dashboard = async (req, res, next) => {
     try {
         // res.json(req.user)
         const user = await User.findOne({
-            attributes: ['email'],
+            attributes: ['email', 'name'],
             where:{
                 id: req.user
             }

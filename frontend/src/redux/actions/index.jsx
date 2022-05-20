@@ -60,7 +60,7 @@ export const getFavorites = (token)=>{
     }
 }
 
-export const toggleFavorite = (movieID, token)=>{
+export const toggleFavorite = (movieID, token, index)=>{
     try {
         return async (dispatch)=>{
             var results = await axios({
@@ -73,7 +73,7 @@ export const toggleFavorite = (movieID, token)=>{
             console.log(results);
             return dispatch({
                 type: TOGGLE_FAVORITE,
-                payload: results.data
+                payload: index
             })
         }
     } catch (error) {
