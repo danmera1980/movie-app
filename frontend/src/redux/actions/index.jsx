@@ -94,3 +94,24 @@ export const getCommentsByMovieID = (movieID) => {
         console.log(error);
     }
 }
+
+export const newCommentByUser = (payload) => {
+    try {
+        const {movieID, token, body} = payload
+        return async(dispatch) => {
+            var results = await axios({
+                method: 'post',
+                url: `${url}/comments/${movieID}`,
+                headers: {
+                    'token': token
+                },
+                data: body
+            })
+
+            return results
+
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

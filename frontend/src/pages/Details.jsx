@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
-import {FaImdb, FaRegStar, FaStar} from 'react-icons/fa';
+import {FaRegStar, FaStar} from 'react-icons/fa';
 import Header from '../components/Header';
-import { getCommentsByMovieID, getMovieDetailsByID } from '../redux/actions';
-import imdbLogo from '../assets/images/IMDB_Logo.svg'
+import { getCommentsByMovieID, getMovieDetailsByID, newCommentByUser } from '../redux/actions';
+import imdbLogo from '../assets/images/IMDB_Logo.svg';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Details({setAuth}) {
   const movie = useSelector(state => state.store.details);
@@ -15,7 +16,13 @@ export default function Details({setAuth}) {
     rating:0,
     comment:""
   })
-  const {id} = useParams();      
+  const {id} = useParams();  
+  
+  const [payload, setPayload] = useState({
+    token: localStorage.token,
+    movieID: id,
+    body: inputs
+  })
 
   useEffect(()=>{
     dispatch(getMovieDetailsByID(id))
@@ -31,16 +38,35 @@ const onChangeInput = (e) => {
     ...inputs,
     [e.target.name]: e.target.value
   })
+  setPayload({
+    ...payload,
+    body: inputs
+  })
   if(e.target.name==="rating"){
     setStars(e.target.value)
   }
 }
+
+
+const onSubmit = (e) => {
+  e.preventDefault();
+  
+  toast.promise(dispatch(newCommentByUser(payload)),
+  {
+    pending: 'Positng ...',
+    success: "Comment Posted",
+    error: "Error posting"
+  })
+  window.location.reload()
+}
+
 
 console.log(inputs, stars);
 
   return (
     <div className='details-page'>
       <div className="main">
+        <ToastContainer/>
         <Header/>
         <Link to="/" className='return'>
           <span>&#129044;</span>
@@ -106,7 +132,7 @@ console.log(inputs, stars);
             </div>
             <div className="comment-form">
               <h3>Commentary</h3>
-              <form>
+              <form onSubmit={(e) => onSubmit(e)}>
                 <div className="personal-rating">
                   <span>Rate: </span>
                   <div className="rating">
@@ -131,8 +157,10 @@ console.log(inputs, stars);
             <div className="comments">
               {comments && comments?.map((comment, index) => (
                 <div className="comment" key={index}>
+                  {console.log(comment.date)}
                   <div className="comment-title">
-                    <span>{comment.name} - {comment.date}</span>
+                    <span>{comment.users[0].name} - {new Date(comment.date).toString().slice(0,16)}</span>
+                    <div>{Array.from({length: comment.rating}, (_, i) => <FaStar className='star' size={24} color="#FF9F1C"/>)}</div>
                   </div>
                   <p>{comment.comment}</p>
                 </div>

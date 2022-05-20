@@ -12,7 +12,8 @@ const getAllCommentsByMovieID = async (req, res,  next) => {
             include: {
                 model: User,
                 attributes: ["name"]
-            }
+            },
+            attributes: ["id","rating","comment",[ "createdAt", "date"]]
         })
         // console.log(allComments);
         if(!allComments){
@@ -33,6 +34,7 @@ const addNewComment = async (req, res, next) => {
         const userId = req.user
         const {movieID} = req.params
         const { rating, comment, imdbID } = req.body
+        console.log(req.body);
 
         const commentByUser = await Comment.create({
             rating,

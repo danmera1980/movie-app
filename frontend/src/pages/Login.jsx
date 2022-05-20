@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Welcome from '../components/Welcome';
 const backend_url = process.env.REACT_APP_BACKEND_URL
 
 export default function Login({setAuth}) {
